@@ -12,10 +12,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        startButton = findViewById(R.id.startB) as Button
+        startButton = findViewById<Button>(R.id.startB)
         startButton.setOnClickListener {
             Toast.makeText(this, "Test", Toast.LENGTH_LONG).show()
-            val intant = Intent(this,firstChoiceScreen::class.java)
+            val intant = Intent(this,First_Choice_Screen::class.java)
             startActivity(intant)
         }
     }

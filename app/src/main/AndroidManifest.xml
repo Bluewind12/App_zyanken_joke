@@ -18,8 +18,10 @@
         </activity>
 
         <activity
-            android:name=".firstChoiceScreen"
-            android:label="@string/first_choice"></activity>
+            android:name=".First_Choice_Screen"
+            android:label="@string/first_choice"/><activity
+            android:name=".First_Question"
+            android:label="@string/first_question"/>
     </application>
 
 </manifest>

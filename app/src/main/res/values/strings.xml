@@ -2,11 +2,11 @@
     <string name="app_name">じゃんけんゲーム</string>
     <string name="title">☆じゃんけんゲーム☆</string>
     <string name="start_button">じゃんけんを始める</string>
-    <string name="first_choice">最初の選択</string>
+    <string name="first_choice">最初の選択</string><string name="first_question">最初の質問</string>
     <string name="gu">グー</string>
     <string name="choki">チョキ</string>
     <string name="pa">パー</string>
-    <string name="q1">画像を見てください</string>
-    <string name="ok">ok</string>
+    <string name="q1">決定を押してください</string>
+    <string name="ok">決定</string>
 
 </resources>
