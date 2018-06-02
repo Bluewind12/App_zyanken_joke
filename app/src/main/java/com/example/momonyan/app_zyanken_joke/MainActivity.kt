@@ -7,7 +7,10 @@ import android.widget.Button
 import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
-  private lateinit var startButton:Button
+    private lateinit var startButton: Button
+
+    //TODO 何かしらを行ったら勝利確定にする（画像をクリック？）
+    //TODO 引き分けも（画像をクリック？）
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         startButton = findViewById<Button>(R.id.startB)
         startButton.setOnClickListener {
             Toast.makeText(this, "Test", Toast.LENGTH_LONG).show()
-            val intant = Intent(this,First_Choice_Screen::class.java)
+            val intant = Intent(this, First_Choice_Screen::class.java)
             startActivity(intant)
         }
     }

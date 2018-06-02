@@ -36,7 +36,8 @@ class Result_Screen : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-
+        //TODO 勝利条件を満たしている場合の処理を行う
+        //TODO 引き分けも入れる？
     }
 
     private fun winHand(hand: String): String {

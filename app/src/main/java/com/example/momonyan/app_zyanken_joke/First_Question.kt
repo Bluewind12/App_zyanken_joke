@@ -56,6 +56,7 @@ class First_Question : AppCompatActivity() {
                 scaleDownAnimation.setDuration(3000)
                 scaleDownAnimation.setAnimationListener(object : Animation.AnimationListener {
                     override fun onAnimationEnd(animation: Animation) {
+                        Toast.makeText(this@First_Question, "なるほど", Toast.LENGTH_SHORT).show()
                         val rotateAnimation = RotateAnimation(0.0f, 360.0f * 5, rotateImage.getWidth() / 2.0f, rotateImage.getHeight() / 2.0f)
                         rotateAnimation.setDuration(6000)
                         rotateAnimation.setAnimationListener(object : Animation.AnimationListener {
