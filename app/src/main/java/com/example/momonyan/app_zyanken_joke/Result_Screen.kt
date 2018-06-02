@@ -7,6 +7,7 @@ import android.widget.Button
 class Result_Screen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.question_first)
+        setContentView(R.layout.result_screen)
+
     }
 }
