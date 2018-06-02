@@ -19,22 +19,34 @@ import java.util.*
 
 
 class First_Question : AppCompatActivity() {
+
+    lateinit var gu: ImageView
+    lateinit var choki: ImageView
+    lateinit var pa: ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.question_first)
 
         val ok_Button = findViewById(R.id.ok_Button) as Button
-        val gu = findViewById<ImageView>(R.id.gu)
-        val choki = findViewById<ImageView>(R.id.choki)
-        val pa = findViewById<ImageView>(R.id.pa)
-        val intent = Intent(this, Result_Screen::class.java)
-        ok_Button.setOnClickListener {
-            animationTemplate(gu, pa, intent)
-        }
 
+        val intentG = intent
+        val intent = Intent(this, Result_Screen::class.java)
+        intent.putExtra("choice", intentG.getStringExtra("choice"))
+
+        gu = findViewById<ImageView>(R.id.gu)
+        choki = findViewById<ImageView>(R.id.choki)
+        pa = findViewById<ImageView>(R.id.pa)
+        var flag = false
+        ok_Button.setOnClickListener {
+            if (!flag) {
+                animationTemplate(selectRandom(), selectRandom(), intent)
+                flag = true
+            }
+        }
     }
 
-    fun animationTemplate(scaleImage: ImageView, rotateImage: ImageView, intent: Intent) {
+    private fun animationTemplate(scaleImage: ImageView, rotateImage: ImageView, intent: Intent) {
         val scaleAnimation = ScaleAnimation(1.0f, 2.5f, 1.0f, 2.5f)
         scaleAnimation.setDuration(5000)
         scaleAnimation.setFillAfter(true)
@@ -49,7 +61,7 @@ class First_Question : AppCompatActivity() {
                         rotateAnimation.setAnimationListener(object : Animation.AnimationListener {
                             override fun onAnimationEnd(animation: Animation) {
                                 startActivity(intent)
-                                Log.d("Animation_Test", "EndAnimation")
+                                Toast.makeText(this@First_Question, "AIの手が決まりました", Toast.LENGTH_LONG).show()
                             }
 
                             override fun onAnimationRepeat(animation: Animation) {}
@@ -69,6 +81,16 @@ class First_Question : AppCompatActivity() {
             override fun onAnimationStart(animation: Animation) {}
         })
         scaleImage.startAnimation(scaleAnimation)
+    }
+
+    private fun selectRandom(): ImageView {
+        val random = Random().nextInt(100)
+        when {
+            random % 3 == 0 -> return gu
+            random % 3 == 1 -> return choki
+            random % 3 == 2 -> return pa
+            else -> error("ランダムの値とかがおかしい")
+        }
     }
 
 }

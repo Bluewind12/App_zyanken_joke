@@ -16,14 +16,17 @@ class First_Choice_Screen : AppCompatActivity() {
 
         rock_Button.setOnClickListener {
             val intent = Intent(this, First_Question::class.java)
+            intent.putExtra("choice","グー")
             startActivity(intent)
         }
         scissors_Button.setOnClickListener {
             val intent = Intent(this, First_Question::class.java)
+            intent.putExtra("choice","チョキ")
             startActivity(intent)
         }
         paper_Button.setOnClickListener {
             val intent = Intent(this, First_Question::class.java)
+            intent.putExtra("choice","パー")
             startActivity(intent)
         }
     }
