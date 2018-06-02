@@ -12,13 +12,12 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import android.view.animation.Animation
+import android.view.animation.RotateAnimation
+import android.view.animation.ScaleAnimation
 import java.util.*
 
 
 class First_Question : AppCompatActivity() {
-    lateinit var gu: ImageView
-    lateinit var choki: ImageView
-    lateinit var pa: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.question_first)
@@ -29,21 +28,46 @@ class First_Question : AppCompatActivity() {
         val pa = findViewById<ImageView>(R.id.pa)
 
         ok_Button.setOnClickListener {
-            //TODO Image Rotate Random
-            val upAlpha = AlphaAnimation(0.0f, 1.0f)
-            upAlpha.setDuration(3000)
-            upAlpha.setAnimationListener(object : Animation.AnimationListener {
-                override fun onAnimationEnd(animation: Animation) {
-                    //TODO Activity create
-                    Log.d("Animation_Test","EndAnimation")
-                }
-                override fun onAnimationRepeat(animation: Animation) {}
-                override fun onAnimationStart(animation: Animation) {}
-
-            })
-            gu.startAnimation(upAlpha)
+            animationTemplate(gu,pa)
         }
 
+    }
+
+    fun animationTemplate(scaleImage: ImageView,rotateImage: ImageView) {
+        val scaleAnimation = ScaleAnimation(1.0f, 2.5f, 1.0f, 2.5f)
+        scaleAnimation.setDuration(5000)
+        scaleAnimation.setFillAfter(true)
+        scaleAnimation.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationEnd(animation: Animation) {
+                val scaleDownAnimation = ScaleAnimation(2.5f,1.0f,  2.5f,1.0f)
+                scaleDownAnimation.setDuration(3000)
+                scaleDownAnimation.setAnimationListener(object : Animation.AnimationListener {
+                    override fun onAnimationEnd(animation: Animation) {
+                        val rotateAnimation = RotateAnimation(0.0f, 360.0f * 5, rotateImage.getWidth() / 2.0f, rotateImage.getHeight() / 2.0f)
+                        rotateAnimation.setDuration(6000)
+                        rotateAnimation.setAnimationListener(object : Animation.AnimationListener {
+                            override fun onAnimationEnd(animation: Animation) {
+                                //TODO Activity create
+                                Log.d("Animation_Test", "EndAnimation")
+                            }
+
+                            override fun onAnimationRepeat(animation: Animation) {}
+                            override fun onAnimationStart(animation: Animation) {}
+                        })
+                        rotateImage.startAnimation(rotateAnimation)
+                    }
+
+                    override fun onAnimationRepeat(animation: Animation) {}
+                    override fun onAnimationStart(animation: Animation) {}
+                })
+                scaleImage.startAnimation(scaleDownAnimation)
+
+            }
+
+            override fun onAnimationRepeat(animation: Animation) {}
+            override fun onAnimationStart(animation: Animation) {}
+        })
+        scaleImage.startAnimation(scaleAnimation)
     }
 
 }
