@@ -19,9 +19,13 @@
 
         <activity
             android:name=".First_Choice_Screen"
-            android:label="@string/first_choice"/><activity
+            android:label="@string/first_choice" />
+        <activity
             android:name=".First_Question"
-            android:label="@string/first_question"/>
+            android:label="@string/first_question" />
+        <activity
+            android:name=".Result_Screen"
+            android:label="@string/result" />
     </application>
 
 </manifest>

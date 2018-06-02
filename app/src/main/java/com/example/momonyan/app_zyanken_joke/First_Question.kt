@@ -3,6 +3,7 @@ package com.example.momonyan.app_zyanken_joke
 import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
@@ -26,20 +27,20 @@ class First_Question : AppCompatActivity() {
         val gu = findViewById<ImageView>(R.id.gu)
         val choki = findViewById<ImageView>(R.id.choki)
         val pa = findViewById<ImageView>(R.id.pa)
-
+        val intent = Intent(this, Result_Screen::class.java)
         ok_Button.setOnClickListener {
-            animationTemplate(gu,pa)
+            animationTemplate(gu, pa, intent)
         }
 
     }
 
-    fun animationTemplate(scaleImage: ImageView,rotateImage: ImageView) {
+    fun animationTemplate(scaleImage: ImageView, rotateImage: ImageView, intent: Intent) {
         val scaleAnimation = ScaleAnimation(1.0f, 2.5f, 1.0f, 2.5f)
         scaleAnimation.setDuration(5000)
         scaleAnimation.setFillAfter(true)
         scaleAnimation.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationEnd(animation: Animation) {
-                val scaleDownAnimation = ScaleAnimation(2.5f,1.0f,  2.5f,1.0f)
+                val scaleDownAnimation = ScaleAnimation(2.5f, 1.0f, 2.5f, 1.0f)
                 scaleDownAnimation.setDuration(3000)
                 scaleDownAnimation.setAnimationListener(object : Animation.AnimationListener {
                     override fun onAnimationEnd(animation: Animation) {
@@ -47,7 +48,7 @@ class First_Question : AppCompatActivity() {
                         rotateAnimation.setDuration(6000)
                         rotateAnimation.setAnimationListener(object : Animation.AnimationListener {
                             override fun onAnimationEnd(animation: Animation) {
-                                //TODO Activity create
+                                startActivity(intent)
                                 Log.d("Animation_Test", "EndAnimation")
                             }
 

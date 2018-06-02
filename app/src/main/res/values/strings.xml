@@ -2,7 +2,8 @@
     <string name="app_name">じゃんけんゲーム</string>
     <string name="title">☆じゃんけんゲーム☆</string>
     <string name="start_button">じゃんけんを始める</string>
-    <string name="first_choice">最初の選択</string><string name="first_question">最初の質問</string>
+    <string name="first_choice">最初の選択</string>
+    <string name="first_question">最初の質問</string><string name="result">結果</string>
     <string name="gu">グー</string>
     <string name="choki">チョキ</string>
     <string name="pa">パー</string>
