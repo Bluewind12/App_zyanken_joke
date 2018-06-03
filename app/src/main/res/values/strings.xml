@@ -13,6 +13,8 @@
     <string name="vs">VS</string>
     <string name="your_Hand">あなたの手</string>
     <string name="AI_Hand">私（AI）の手</string>
-
-
+    <string name="reset">最初に戻る</string>
+    <string name="lose">あなたの負けです</string>
+    <string name="draw">引き分けです</string>
+    <string name="win">あなたの勝ちです</string>
 </resources>

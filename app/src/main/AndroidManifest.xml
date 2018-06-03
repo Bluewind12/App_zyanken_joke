@@ -3,7 +3,7 @@
     package="com.example.momonyan.app_zyanken_joke">
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -18,13 +18,13 @@
         </activity>
 
         <activity
-            android:name=".First_Choice_Screen"
+            android:name=".ChoiceScreen"
             android:label="@string/first_choice" />
         <activity
-            android:name=".First_Question"
+            android:name=".QuestionScreen"
             android:label="@string/first_question" />
         <activity
-            android:name=".Result_Screen"
+            android:name=".ResultScreen"
             android:label="@string/result" />
     </application>
 

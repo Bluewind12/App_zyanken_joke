@@ -1,14 +1,8 @@
 package com.example.momonyan.app_zyanken_joke
 
-import android.animation.Animator
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
-import android.view.animation.AlphaAnimation
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
@@ -18,30 +12,34 @@ import android.view.animation.ScaleAnimation
 import java.util.*
 
 
-class First_Question : AppCompatActivity() {
+class QuestionScreen : AppCompatActivity() {
 
-    lateinit var gu: ImageView
-    lateinit var choki: ImageView
-    lateinit var pa: ImageView
+    private lateinit var gu: ImageView
+    private lateinit var choki: ImageView
+    private lateinit var pa: ImageView
+    private var flagCount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.question_first)
 
-        val ok_Button = findViewById(R.id.ok_Button) as Button
+        val okButton = findViewById<Button>(R.id.ok_Button)
 
         val intentG = intent
-        val intent = Intent(this, Result_Screen::class.java)
+        val intent = Intent(this, ResultScreen::class.java)
         intent.putExtra("choice", intentG.getStringExtra("choice"))
+        intent.putExtra("win", intentG.getIntExtra("winner", 0))
 
-        gu = findViewById<ImageView>(R.id.gu)
-        choki = findViewById<ImageView>(R.id.choki)
-        pa = findViewById<ImageView>(R.id.pa)
+        gu = findViewById(R.id.gu)
+        choki = findViewById(R.id.choki)
+        pa = findViewById(R.id.pa)
         var flag = false
-        ok_Button.setOnClickListener {
+        okButton.setOnClickListener {
             if (!flag) {
                 animationTemplate(selectRandom(), selectRandom(), intent)
                 flag = true
+            } else {
+                flagCount++
             }
         }
     }
@@ -56,13 +54,19 @@ class First_Question : AppCompatActivity() {
                 scaleDownAnimation.setDuration(3000)
                 scaleDownAnimation.setAnimationListener(object : Animation.AnimationListener {
                     override fun onAnimationEnd(animation: Animation) {
-                        Toast.makeText(this@First_Question, "なるほど", Toast.LENGTH_SHORT).show()
+                        if (flagCount != 1) {
+                            intent.putExtra("win", 0)
+                        }
+                        Toast.makeText(this@QuestionScreen, "なるほど", Toast.LENGTH_SHORT).show()
                         val rotateAnimation = RotateAnimation(0.0f, 360.0f * 5, rotateImage.getWidth() / 2.0f, rotateImage.getHeight() / 2.0f)
                         rotateAnimation.setDuration(6000)
                         rotateAnimation.setAnimationListener(object : Animation.AnimationListener {
                             override fun onAnimationEnd(animation: Animation) {
+                                if (flagCount != 3) {
+                                    intent.putExtra("win", 0)
+                                }
                                 startActivity(intent)
-                                Toast.makeText(this@First_Question, "AIの手が決まりました", Toast.LENGTH_LONG).show()
+                                Toast.makeText(this@QuestionScreen, "AIの手が決まりました", Toast.LENGTH_LONG).show()
                             }
 
                             override fun onAnimationRepeat(animation: Animation) {}

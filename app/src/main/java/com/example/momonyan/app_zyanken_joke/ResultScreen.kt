@@ -9,7 +9,7 @@ import android.graphics.Color
 import android.widget.ImageView
 
 
-class Result_Screen : AppCompatActivity() {
+class ResultScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.result_screen)
@@ -18,16 +18,35 @@ class Result_Screen : AppCompatActivity() {
         val yourHandImageView = findViewById<ImageView>(R.id.your_Hand_Image)
         val resultText = findViewById<TextView>(R.id.result_Text)
         val selectHand = intent.getStringExtra("choice")
-        val ai_hand = winHand(selectHand)
+        val winner = intent.getIntExtra("win", 0)
+        var aiHand: String
         var clickCheck = false
 
+
         resultButton.setOnClickListener {
-            if (!clickCheck) {
-                setImage(ai_hand, aiHandImageView)
+            if (winner == 0 && !clickCheck) {
+                aiHand = winHand(selectHand)
+                setImage(aiHand, aiHandImageView)
                 setImage(selectHand, yourHandImageView)
-                resultText.setText("あなたの負けです")
+                resultText.setText(R.string.lose)
                 resultText.setTextColor(Color.BLUE)
-                resultButton.setText("最初に戻る")
+                resultButton.setText(R.string.reset)
+                clickCheck = true
+            } else if (winner == 1 && !clickCheck) {
+                aiHand = loseHand(selectHand)
+                setImage(aiHand, aiHandImageView)
+                setImage(selectHand, yourHandImageView)
+                resultText.setText(R.string.win)
+                resultText.setTextColor(Color.RED)
+                resultButton.setText(R.string.reset)
+                clickCheck = true
+            } else if (winner == 2 && !clickCheck) {
+                aiHand = selectHand
+                setImage(aiHand, aiHandImageView)
+                setImage(selectHand, yourHandImageView)
+                resultText.setText(R.string.draw)
+                resultText.setTextColor(Color.GREEN)
+                resultButton.setText(R.string.reset)
                 clickCheck = true
             } else {
                 val intent = Intent(this, MainActivity::class.java)
@@ -36,33 +55,31 @@ class Result_Screen : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-        //TODO 勝利条件を満たしている場合の処理を行う
-        //TODO 引き分けも入れる？
     }
 
     private fun winHand(hand: String): String {
         when {
-            hand.equals("グー") -> return "パー"
-            hand.equals("チョキ") -> return "グー"
-            hand.equals("パー") -> return "チョキ"
+            hand == "グー" -> return "パー"
+            hand == "チョキ" -> return "グー"
+            hand == "パー" -> return "チョキ"
             else -> error("選択されてないエラー")
         }
     }
 
     private fun loseHand(hand: String): String {
         when {
-            hand.equals("グー") -> return "チョキ"
-            hand.equals("チョキ") -> return "パー"
-            hand.equals("パー") -> return "グー"
+            hand == "グー" -> return "チョキ"
+            hand == "チョキ" -> return "パー"
+            hand == "パー" -> return "グー"
             else -> error("選択されてないエラー")
         }
     }
 
     private fun setImage(hand: String, imageView: ImageView) {
         when {
-            hand.equals("グー") -> imageView.setImageResource(R.drawable.janken_gu)
-            hand.equals("チョキ") -> imageView.setImageResource(R.drawable.janken_choki)
-            hand.equals("パー") -> imageView.setImageResource(R.drawable.janken_pa)
+            hand == "グー" -> imageView.setImageResource(R.drawable.janken_gu)
+            hand == "チョキ" -> imageView.setImageResource(R.drawable.janken_choki)
+            hand == "パー" -> imageView.setImageResource(R.drawable.janken_pa)
             else -> error("選択されてないエラー")
         }
     }

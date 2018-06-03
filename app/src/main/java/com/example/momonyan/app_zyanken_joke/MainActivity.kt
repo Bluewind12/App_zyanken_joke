@@ -4,22 +4,27 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toast
+import android.widget.ImageButton
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var startButton: Button
-
-    //TODO 何かしらを行ったら勝利確定にする（画像をクリック？）
-    //TODO 引き分けも（画像をクリック？）
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        startButton = findViewById<Button>(R.id.startB)
+        var winner = 0   //0:AI , 1:player , 2:draw
+        val startButton = findViewById<Button>(R.id.startB)
+        val winImageView = findViewById<ImageButton>(R.id.winImage)
+        val drawImageView = findViewById<ImageButton>(R.id.drawImage)
         startButton.setOnClickListener {
-            Toast.makeText(this, "Test", Toast.LENGTH_LONG).show()
-            val intant = Intent(this, First_Choice_Screen::class.java)
-            startActivity(intant)
+            val nextIntent = Intent(this, ChoiceScreen::class.java)
+            nextIntent.putExtra("winner", winner)
+            startActivity(nextIntent)
+        }
+        winImageView.setOnClickListener {
+            winner = 1
+        }
+        drawImageView.setOnClickListener {
+            winner = 2
         }
     }
+
 }
