@@ -46,12 +46,12 @@ class QuestionScreen : AppCompatActivity() {
 
     private fun animationTemplate(scaleImage: ImageView, rotateImage: ImageView, intent: Intent) {
         val scaleAnimation = ScaleAnimation(1.0f, 2.5f, 1.0f, 2.5f)
-        scaleAnimation.setDuration(5000)
-        scaleAnimation.setFillAfter(true)
+        scaleAnimation.duration = 5000
+        scaleAnimation.fillAfter = true
         scaleAnimation.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationEnd(animation: Animation) {
                 val scaleDownAnimation = ScaleAnimation(2.5f, 1.0f, 2.5f, 1.0f)
-                scaleDownAnimation.setDuration(3000)
+                scaleDownAnimation.duration = 3000
                 scaleDownAnimation.setAnimationListener(object : Animation.AnimationListener {
                     override fun onAnimationEnd(animation: Animation) {
                         if (flagCount != 1) {
@@ -59,7 +59,7 @@ class QuestionScreen : AppCompatActivity() {
                         }
                         Toast.makeText(this@QuestionScreen, "なるほど", Toast.LENGTH_SHORT).show()
                         val rotateAnimation = RotateAnimation(0.0f, 360.0f * 5, rotateImage.getWidth() / 2.0f, rotateImage.getHeight() / 2.0f)
-                        rotateAnimation.setDuration(6000)
+                        rotateAnimation.duration = 6000
                         rotateAnimation.setAnimationListener(object : Animation.AnimationListener {
                             override fun onAnimationEnd(animation: Animation) {
                                 if (flagCount != 3) {
